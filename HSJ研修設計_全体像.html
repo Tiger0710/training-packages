@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSJ 研修設計 全体像</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .header-tags {
+            margin-top: 12px;
+        }
+        .header-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 0.9rem;
+            margin: 4px;
+        }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid;
+        }
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        .summary-card.safety { border-left-color: #E74C3C; }
+        .summary-card.tech { border-left-color: #4A90E2; }
+        .summary-card.human { border-left-color: #50C878; }
+        .summary-card.mgmt { border-left-color: #F39C12; }
+        .summary-card.cert { border-left-color: #9B59B6; }
+        .summary-card h3 { font-size: 1.2rem; margin-bottom: 8px; font-weight: 700; }
+        .summary-card.safety h3 { color: #E74C3C; }
+        .summary-card.tech h3 { color: #4A90E2; }
+        .summary-card.human h3 { color: #50C878; }
+        .summary-card.mgmt h3 { color: #F39C12; }
+        .summary-card.cert h3 { color: #9B59B6; }
+        .summary-card p { font-size: 0.9rem; color: #666; margin-bottom: 4px; }
+
+        /* Content area */
+        .content {
+            padding: 0 40px 40px;
+        }
+
+        /* Section */
+        .section {
+            margin-top: 48px;
+            scroll-margin-top: 20px;
+        }
+        h2 {
+            font-size: 1.6rem;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            color: #667eea;
+            font-weight: 700;
+        }
+        .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 15px;
+            font-weight: 700;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        h3 {
+            font-size: 1.2rem;
+            margin: 25px 0 12px;
+            font-weight: 600;
+            color: #444;
+            padding-left: 12px;
+            border-left: 4px solid #764ba2;
+        }
+
+        /* Premise box */
+        .premise {
+            background: #f0f0ff;
+            border: 1px solid #c8c8f0;
+            border-radius: 12px;
+            padding: 28px;
+            margin-top: 32px;
+        }
+        .premise h3 {
+            border-left: none;
+            padding-left: 0;
+            margin-top: 0;
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+        .premise ul { margin-top: 8px; padding-left: 20px; }
+        .premise li { margin: 4px 0; }
+        .premise .highlight { color: #E74C3C; font-weight: 700; }
+
+        /* Pillar cards grid */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .pillar-card {
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            border: 2px solid;
+            transition: transform 0.3s;
+        }
+        .pillar-card:hover { transform: translateY(-3px); }
+        .pillar-card .pillar-icon { font-size: 28px; margin-bottom: 8px; }
+        .pillar-card h4 { font-size: 0.9rem; margin: 0 0 6px; font-weight: 700; }
+        .pillar-card p { font-size: 0.8rem; color: #666; line-height: 1.5; }
+        .pillar-safety { background: #fce8e6; border-color: #E74C3C; }
+        .pillar-safety h4 { color: #E74C3C; }
+        .pillar-tech { background: #e8f0fe; border-color: #4A90E2; }
+        .pillar-tech h4 { color: #4A90E2; }
+        .pillar-human { background: #e8f5ec; border-color: #50C878; }
+        .pillar-human h4 { color: #50C878; }
+        .pillar-mgmt { background: #fdf0e2; border-color: #F39C12; }
+        .pillar-mgmt h4 { color: #F39C12; }
+        .pillar-cert { background: #f3e8fd; border-color: #9B59B6; }
+        .pillar-cert h4 { color: #9B59B6; }
+
+        /* Hierarchy grid */
+        .hierarchy-grid {
+            display: grid;
+            grid-template-columns: 120px repeat(4, 1fr);
+            gap: 1px;
+            background: #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .hierarchy-grid .hg-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .hierarchy-grid .hg-label {
+            background: #eef1f5;
+            padding: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        .hierarchy-grid .hg-cell {
+            background: #fff;
+            padding: 12px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 24px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        thead {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        td { font-size: 0.88rem; vertical-align: top; }
+        tbody tr:nth-child(even) { background: #f8f9fa; }
+        tbody tr:hover { background: #e9ecef; transition: background 0.2s; }
+
+        /* Skill tables */
+        .skill-table td:first-child {
+            font-weight: 700;
+            color: #667eea;
+            white-space: nowrap;
+            background: #f5f7fa;
+        }
+
+        /* Details/Summary (accordion) */
+        details {
+            margin: 20px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        summary {
+            padding: 16px 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.05rem;
+            user-select: none;
+            transition: background 0.3s;
+        }
+        summary:hover { background: #e9ecef; }
+        details[open] summary { background: #dee2e6; }
+        details > *:not(summary) { padding: 0 20px; }
+        details > table { margin: 16px 20px; width: calc(100% - 40px); }
+
+        /* Callout */
+        .callout {
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 0.92rem;
+        }
+        .callout-safety {
+            background: #fce8e6;
+            border-left: 4px solid #E74C3C;
+        }
+        .callout-info {
+            background: #f0f0ff;
+            border-left: 4px solid #667eea;
+        }
+        .callout strong { display: block; margin-bottom: 4px; }
+
+        /* Overview list (for simplified sections) */
+        .overview-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+        .overview-list li {
+            padding: 12px 16px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid;
+            font-size: 0.92rem;
+        }
+        .overview-list li strong { display: block; margin-bottom: 2px; }
+        .overview-list.safety li { border-left-color: #E74C3C; }
+        .overview-list.tech li { border-left-color: #4A90E2; }
+        .overview-list.human li { border-left-color: #50C878; }
+        .overview-list.mgmt li { border-left-color: #F39C12; }
+        .overview-list.cert li { border-left-color: #9B59B6; }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge-required { background: #fce8e6; color: #E74C3C; }
+        .badge-recommended { background: #f0f0ff; color: #667eea; }
+
+        /* Brother-Sister grid */
+        .bs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .bs-card {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .bs-card h4 { color: #667eea; margin-bottom: 10px; font-size: 1rem; border-left: none; padding-left: 0; }
+        .bs-card ul { padding-left: 18px; }
+        .bs-card li { margin: 6px 0; font-size: 0.9rem; }
+
+        /* Chart: 研修体系図 */
+        .chart-wrapper {
+            margin: 24px 0;
+        }
+        .chart-foundation {
+            border-radius: 10px;
+            padding: 16px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: white;
+            margin-bottom: 16px;
+        }
+        .chart-foundation.safety-bar {
+            background: linear-gradient(135deg, #E74C3C, #c0392b);
+        }
+        .chart-foundation.support-bar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin-bottom: 8px;
+        }
+        .chart-foundation small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+        /* 単一グリッドで行を揃える（3列 × 5行） */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .chart-col-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .chart-block {
+            border-radius: 8px;
+            padding: 14px 16px;
+            border-left: 4px solid;
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-block h5 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .chart-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+        .chart-block li {
+            font-size: 0.78rem;
+            color: #555;
+            line-height: 1.5;
+            padding: 1px 0;
+        }
+        .chart-block.tech { background: #e8f0fe; border-left-color: #4A90E2; }
+        .chart-block.tech h5 { color: #4A90E2; }
+        .chart-block.human { background: #e8f5ec; border-left-color: #50C878; }
+        .chart-block.human h5 { color: #50C878; }
+        .chart-block.mgmt { background: #fdf0e2; border-left-color: #F39C12; }
+        .chart-block.mgmt h5 { color: #F39C12; }
+        .chart-block.cert { background: #f3e8fd; border-left-color: #9B59B6; }
+        .chart-block.cert h5 { color: #9B59B6; }
+        .chart-block.common { background: #f0f0ff; border-left-color: #667eea; }
+        .chart-block.common h5 { color: #667eea; }
+
+        @media (max-width: 700px) {
+            .chart-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            padding: 32px 40px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Print */
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .section { page-break-inside: avoid; }
+            table { page-break-inside: avoid; }
+        }
+        @media (max-width: 900px) {
+            header h1 { font-size: 1.8rem; }
+            .summary-cards { grid-template-columns: 1fr 1fr; padding: 20px; }
+            .pillars { grid-template-columns: repeat(3, 1fr); }
+            .hierarchy-grid { grid-template-columns: 100px repeat(4, 1fr); }
+            .bs-grid { grid-template-columns: 1fr; }
+            .content { padding: 0 20px 20px; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 10px 8px; }
+        }
+        @media (max-width: 600px) {
+            .summary-cards { grid-template-columns: 1fr; }
+            .pillars { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HSJ 研修設計 全体像</h1>
+            <p>人財育成体系に基づく研修プログラム設計書</p>
+            <div class="header-tags">
+                <span class="header-tag">総務人事部</span>
+                <span class="header-tag">2026年4月</span>
+            </div>
+        </header>
+
+        <!-- Summary Cards: 5本柱 -->
+        <div class="summary-cards">
+            <div class="summary-card safety">
+                <h3>安全教育</h3>
+                <p><strong>対象:</strong> 全社員（継続）</p>
+                <p>KY活動、法定特別教育、事故事例研究</p>
+            </div>
+            <div class="summary-card tech">
+                <h3>コア技術研修</h3>
+                <p><strong>対象:</strong> 技術職中心</p>
+                <p>光ファイバー、基地局、LAN、測定器</p>
+            </div>
+            <div class="summary-card human">
+                <h3>ヒューマンスキル</h3>
+                <p><strong>対象:</strong> 全職種</p>
+                <p>コミュニケーション、ハラスメント防止</p>
+            </div>
+            <div class="summary-card mgmt">
+                <h3>マネジメント</h3>
+                <p><strong>対象:</strong> 課長代理以上</p>
+                <p>リーダーシップ、工程・原価・労務管理</p>
+            </div>
+            <div class="summary-card cert">
+                <h3>資格取得支援</h3>
+                <p><strong>対象:</strong> 全社員</p>
+                <p>階層別の必須・推奨資格、勉強会</p>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <!-- 前提 -->
+            <div class="premise" id="premise">
+                <h3>前提条件</h3>
+                <ul>
+                    <li><strong>業態:</strong> 電気通信工事業（携帯基地局アンテナ・装機が主力）</li>
+                    <li><strong>ポジション:</strong> 一次下請</li>
+                    <li><strong>ビジョン:</strong> グループ100億円 / HSJ単体50億円を目指す</li>
+                </ul>
+                <h3 style="margin-top: 16px;">現状の課題</h3>
+                <ul>
+                    <li class="highlight">入社時2週間の共通研修のみ、以降はOJT頼み</li>
+                    <li class="highlight">OJTメニューが未確立、教える側のスキルもバラバラ</li>
+                    <li>資格教育は社員ボランティア</li>
+                    <li>階層別の教育体系がない</li>
+                    <li>個々人の育成計画がない</li>
+                </ul>
+            </div>
+
+            <!-- 1. 体系の全体構造 -->
+            <div class="section" id="structure">
+                <h2><span class="section-num">1</span>体系の全体構造</h2>
+
+                <h3>5つの柱</h3>
+                <div class="pillars">
+                    <div class="pillar-card pillar-safety">
+                        <div class="pillar-icon">&#x1F6E1;</div>
+                        <h4>安全教育</h4>
+                        <p>KY活動、リスクアセスメント、保護具、法令、事故事例</p>
+                    </div>
+                    <div class="pillar-card pillar-tech">
+                        <div class="pillar-icon">&#x1F527;</div>
+                        <h4>コア技術研修</h4>
+                        <p>光ファイバー、基地局施工、LAN配線、測定器</p>
+                    </div>
+                    <div class="pillar-card pillar-human">
+                        <div class="pillar-icon">&#x1F91D;</div>
+                        <h4>ヒューマンスキル</h4>
+                        <p>コミュニケーション、ハラスメント防止、情報セキュリティ</p>
+                    </div>
+                    <div class="pillar-card pillar-mgmt">
+                        <div class="pillar-icon">&#x1F4CA;</div>
+                        <h4>マネジメント</h4>
+                        <p>リーダーシップ、工程管理、原価管理、労務管理</p>
+                    </div>
+                    <div class="pillar-card pillar-cert">
+                        <div class="pillar-icon">&#x1F4DC;</div>
+                        <h4>資格取得支援</h4>
+                        <p>階層別の必須・推奨資格、勉強会、受験費用補助</p>
+                    </div>
+                </div>
+
+                <h3>4職種 &times; 3階層</h3>
+                <div class="hierarchy-grid">
+                    <div class="hg-header">階層</div>
+                    <div class="hg-header">営業</div>
+                    <div class="hg-header">技術</div>
+                    <div class="hg-header">安品</div>
+                    <div class="hg-header">スタッフ</div>
+                    <div class="hg-label">課長・担当課長</div>
+                    <div class="hg-cell">営業課長</div>
+                    <div class="hg-cell">技術課長</div>
+                    <div class="hg-cell">安品課長</div>
+                    <div class="hg-cell">管理課長</div>
+                    <div class="hg-label">課長代理</div>
+                    <div class="hg-cell">営業課長代理</div>
+                    <div class="hg-cell">技術課長代理</div>
+                    <div class="hg-cell">安品課長代理</div>
+                    <div class="hg-cell">管理課長代理</div>
+                    <div class="hg-label">担当〜主任</div>
+                    <div class="hg-cell">営業担当・主任</div>
+                    <div class="hg-cell">技術担当・主任</div>
+                    <div class="hg-cell">安品担当・主任</div>
+                    <div class="hg-cell">管理担当・主任</div>
+                </div>
+                <p style="font-size:0.85rem; color:#666;">※次長・部長は別途「経営層研修」として設計</p>
+            </div>
+
+            <!-- 2. 求める人財像 -->
+            <div class="section" id="talent">
+                <h2><span class="section-num">2</span>求める人財像</h2>
+
+                <div class="callout callout-info">
+                    <strong>設計方針</strong>
+                    各項目は「何ができるか（スキル）」で定義する。成果物や数値目標は評価制度側で設定する。
+                </div>
+
+                <h3>営業職</h3>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:12px;">※当社の営業職は技術知識を前提とした営業活動が求められる。技術を理解した上で客先と会話し、提案・調整を行う。</p>
+                <table class="skill-table">
+                    <thead><tr><th>スキル</th><th>担当〜主任</th><th>課長代理</th><th>課長</th></tr></thead>
+                    <tbody>
+                        <tr><td>技術理解</td><td>自社の施工内容・工法・使用機材を理解し、客先に説明できる</td><td>客先の技術的な要望を理解し、社内の技術部門と正確に橋渡しできる</td><td>技術動向を把握し、客先に対し技術的な裏付けを持った提案ができる</td></tr>
+                        <tr><td>信頼構築</td><td>期日・約束を守り、誠実な対応ができる</td><td>客先の課題やニーズを把握し、的確に応えられる</td><td>客先の経営課題を理解し、パートナーとして関係を築ける</td></tr>
+                        <tr><td>提案・交渉</td><td>見積依頼に対して正確に対応できる</td><td>客先の要望を整理し、自社に有利な条件で調整できる</td><td>価格・工期・仕様について客先と対等に交渉できる</td></tr>
+                        <tr><td>計数管理</td><td>実行予算の構造を理解し、予算内で業務を進められる</td><td>見積作成から請求まで一連の数字を管理できる</td><td>部門の売上・粗利を予測し、予実差異を分析できる</td></tr>
+                        <tr><td>案件管理</td><td>担当案件の工程・進捗を把握し、社内に共有できる</td><td>案件の工程・コスト・リスクを総合的に判断し、社内外と調整できる</td><td>複数案件を俯瞰し、優先順位とリソース配分を判断できる</td></tr>
+                        <tr><td>育成</td><td>自分の業務を言語化し、後輩に伝えられる</td><td>後輩にOJTで体系的に指導できる</td><td>部下の強み・課題を見極め、育成計画を設計できる</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>技術職</h3>
+                <table class="skill-table">
+                    <thead><tr><th>スキル</th><th>担当〜主任</th><th>課長代理</th><th>課長</th></tr></thead>
+                    <tbody>
+                        <tr><td>施工技術</td><td>図面を読み、指示に沿って正確に施工できる</td><td>現場の状況に応じて施工方法を判断・選択できる</td><td>技術的な課題に対し改善策を立案・提案できる</td></tr>
+                        <tr><td>工程管理</td><td>工程表を読み、自分の作業を段取りできる</td><td>一物件の工程を管理し、遅延リスクを予測できる</td><td>複数現場のリソース配分と優先順位を判断できる</td></tr>
+                        <tr><td>安全管理</td><td>法令・施工GL・クライアントルールを理解し遵守できる</td><td>現場のリスクを評価し、適切な安全対策を実行できる</td><td>安品と連携し、現場全体の安全管理体制を構築できる</td></tr>
+                        <tr><td>原価管理</td><td>工事原価の構造（材料・労務・外注）を理解している</td><td>実行予算を作成し、原価を意識して行動できる</td><td>外注交渉・予算評価を含め、部門の原価を管理できる</td></tr>
+                        <tr><td>問題解決</td><td>異常に気づき、正確に報告できる</td><td>トラブルの原因を切り分け、対処できる</td><td>再発防止の仕組みを設計し、組織に定着させられる</td></tr>
+                        <tr><td>育成</td><td>自分の作業手順を後輩に説明できる</td><td>後輩の技量に合わせた指導ができる</td><td>部下の育成計画を設計し、成長を管理できる</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>安品職</h3>
+                <table class="skill-table">
+                    <thead><tr><th>スキル</th><th>担当〜主任</th><th>課長代理</th><th>課長</th></tr></thead>
+                    <tbody>
+                        <tr><td>安全管理</td><td>安全関連法規・社内規程を理解し遵守できる</td><td>安全パトロールを単独で実施し、是正指示ができる</td><td>全社の安全管理計画を策定・運用できる</td></tr>
+                        <tr><td>品質管理</td><td>チェックリストに沿って自主検査ができる</td><td>品質計画を立案し、施工品質を監査できる</td><td>品質マネジメントシステム全体を設計・改善できる</td></tr>
+                        <tr><td>リスク評価</td><td>現場の危険を認識し、指摘できる</td><td>リスクアセスメントを実施し対策を立案できる</td><td>全社のリスク管理体制を構築・運用できる</td></tr>
+                        <tr><td>法令対応</td><td>労安法・建設業法の基礎を理解している</td><td>法改正を把握し、社内への展開ができる</td><td>行政・元請の監査に対応し、是正を主導できる</td></tr>
+                        <tr><td>教育・指導</td><td>安全教育の準備・補助ができる</td><td>安全教育の講師として研修を実施できる</td><td>安全教育プログラム全体を設計・運営できる</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>スタッフ職（総務・人事・経理等）</h3>
+                <table class="skill-table">
+                    <thead><tr><th>スキル</th><th>担当〜主任</th><th>課長代理</th><th>課長</th></tr></thead>
+                    <tbody>
+                        <tr><td>業務管理</td><td>担当業務を正確・期日通りに処理できる</td><td>担当領域の業務を自立的に完結できる</td><td>部門全体の業務を俯瞰し、最適化できる</td></tr>
+                        <tr><td>法務・労務</td><td>就業規則・関連法令の基礎を理解している</td><td>労基法・社保・建設業法の実務を運用できる</td><td>法改正に対応し、社内制度を設計・改定できる</td></tr>
+                        <tr><td>計数管理</td><td>伝票処理・経費精算を正確にできる</td><td>月次決算補助・予算管理の実務ができる</td><td>部門予算を策定し、予実差異を分析・報告できる</td></tr>
+                        <tr><td>業務改善</td><td>自分の業務の非効率に気づき、報告できる</td><td>業務効率化の手段を選定し、導入提案できる</td><td>部門横断の業務改善・DX推進を計画・実行できる</td></tr>
+                        <tr><td>育成</td><td>自分の業務を後輩に引き継げる</td><td>OJTトレーナーとして計画的に指導できる</td><td>部門の人材育成方針を策定し、実行できる</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 3. 安全教育（概要） -->
+            <div class="section" id="safety">
+                <h2><span class="section-num">3</span>安全教育プログラム</h2>
+
+                <div class="callout callout-safety">
+                    <strong>安全教育は研修体系の1項目ではなく、独立した継続プログラムとして運用する。</strong>
+                    電気通信工事は高所作業・感電リスクを伴う。安全教育の不備は元請からの信頼喪失に直結する。
+                </div>
+
+                <ul class="overview-list safety">
+                    <li>
+                        <strong>入社時教育（必須・約27時間）</strong>
+                        労働安全衛生法の基礎 / KY活動 / 保護具の正しい使い方 / 電気安全 / 高所作業の安全 / 事故事例研究 / 緊急時対応 / 車両安全
+                    </li>
+                    <li>
+                        <strong>継続教育（年間サイクル）</strong>
+                        毎日の朝礼KY活動 → 月1回安全ミーティング → 四半期パトロール振り返り → 年1回安全大会・フルハーネス再訓練 → 季節別対策（熱中症・冬季）
+                    </li>
+                    <li>
+                        <strong>法定特別教育</strong>
+                        フルハーネス型墜落制止用器具（入社時） / 低圧電気取扱い（入社時） / 酸素欠乏危険作業（必要時） / 職長・安全衛生責任者教育（主任昇格時）
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 4. コア技術研修（概要） -->
+            <div class="section" id="core-tech">
+                <h2><span class="section-num">4</span>コア技術研修プログラム</h2>
+
+                <ul class="overview-list tech">
+                    <li>
+                        <strong>基礎技術（担当〜主任向け・約44時間）</strong>
+                        LAN基礎 / IP基礎 / 光ファイバー基礎 / UTPケーブル成端 / 融着接続 / 測定器の使い方 / 基地局工事の基礎 / 図面の読み方 / 施工報告書
+                    </li>
+                    <li>
+                        <strong>実践技術（課長代理向け・約30時間）</strong>
+                        トラブルシューティング / 設計・積算の基礎 / 施工管理4大管理 / 新技術動向（5G・Wi-Fi 6E/7） / OTDR測定
+                    </li>
+                    <li>
+                        <strong>管理技術（課長向け・約12時間）</strong>
+                        複数現場の同時管理 / 品質マネジメント（QC7つ道具） / 協力会社マネジメント
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 5. ヒューマンスキル（概要） -->
+            <div class="section" id="human">
+                <h2><span class="section-num">5</span>ヒューマンスキル研修</h2>
+
+                <ul class="overview-list human">
+                    <li>
+                        <strong>全社員共通（年1回）</strong>
+                        ハラスメント防止 / 情報セキュリティ / コンプライアンス / メンタルヘルス（セルフケア）
+                    </li>
+                    <li>
+                        <strong>担当〜主任</strong>
+                        コミュニケーション基礎（報連相・傾聴） / ロジカルシンキング / 時間管理
+                    </li>
+                    <li>
+                        <strong>課長代理</strong>
+                        プレゼンテーション / コーチング（SBI・GROWモデル） / ネゴシエーション
+                    </li>
+                    <li>
+                        <strong>課長</strong>
+                        ラインケア（部下のメンタルヘルス管理） / 評価面談スキル / 課題解決・戦略策定
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 6. マネジメント（概要） -->
+            <div class="section" id="mgmt">
+                <h2><span class="section-num">6</span>マネジメント研修</h2>
+
+                <ul class="overview-list mgmt">
+                    <li>
+                        <strong>課長代理</strong>
+                        リーダーシップ基礎（チーム運営・モチベーション管理） / プロジェクトマネジメント（工程・進捗・リカバリー） / 原価管理基礎（実行予算・出来高管理）
+                    </li>
+                    <li>
+                        <strong>課長</strong>
+                        組織運営（権限委譲・会議体設計） / 労務管理（36協定・安全配慮義務） / 経営管理基礎（予算策定・予実管理） / リスクマネジメント
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 7. 資格ロードマップ -->
+            <div class="section" id="cert">
+                <h2><span class="section-num">7</span>資格取得ロードマップ</h2>
+
+                <details open>
+                    <summary>技術職</summary>
+                    <table>
+                        <thead><tr><th>階層</th><th>必須資格</th><th>推奨資格</th></tr></thead>
+                        <tbody>
+                            <tr><td style="font-weight:700">担当〜主任</td><td>職長・安全衛生責任者教育 / 低圧電気取扱い特別教育 / ITパスポート</td><td>第一級陸上特殊無線技士</td></tr>
+                            <tr><td style="font-weight:700">課長代理</td><td>第二種電気工事士 / FP3級・日商簿記3級</td><td>工事担任者DD3種 / ベンダー系NW資格</td></tr>
+                            <tr><td style="font-weight:700">課長</td><td>2級電気工事施工管理技士 or 2級電気通信施工管理技士 / FP3級・簿記3級</td><td>1級施工管理技士 / 第一種衛生管理者</td></tr>
+                        </tbody>
+                    </table>
+                </details>
+
+                <details>
+                    <summary>営業職</summary>
+                    <table>
+                        <thead><tr><th>階層</th><th>必須資格</th><th>推奨資格</th></tr></thead>
+                        <tbody>
+                            <tr><td style="font-weight:700">担当〜主任</td><td>ITパスポート</td><td>現場経験（技術理解のため）</td></tr>
+                            <tr><td style="font-weight:700">課長代理</td><td>FP3級・日商簿記3級</td><td>営業マン研修修了</td></tr>
+                            <tr><td style="font-weight:700">課長</td><td>FP2級</td><td>建設業経理事務士2級 / 日商簿記2級</td></tr>
+                        </tbody>
+                    </table>
+                </details>
+
+                <details>
+                    <summary>安品職</summary>
+                    <table>
+                        <thead><tr><th>階層</th><th>必須資格</th><th>推奨資格</th></tr></thead>
+                        <tbody>
+                            <tr><td style="font-weight:700">担当〜主任</td><td>職長・安全衛生責任者教育 / 低圧電気・フルハーネス特別教育</td><td>第一種衛生管理者</td></tr>
+                            <tr><td style="font-weight:700">課長代理</td><td>第一種衛生管理者</td><td>安全管理者選任時研修</td></tr>
+                            <tr><td style="font-weight:700">課長</td><td>第一種衛生管理者 / 建設業経理事務士3級</td><td>労働安全コンサルタント</td></tr>
+                        </tbody>
+                    </table>
+                </details>
+
+                <details>
+                    <summary>スタッフ職</summary>
+                    <table>
+                        <thead><tr><th>階層</th><th>必須資格</th><th>推奨資格</th></tr></thead>
+                        <tbody>
+                            <tr><td style="font-weight:700">担当〜主任</td><td>ITパスポート</td><td>日商簿記3級</td></tr>
+                            <tr><td style="font-weight:700">課長代理</td><td>日商簿記3級 / 建設業経理事務士3級</td><td>社会保険労務関連知識</td></tr>
+                            <tr><td style="font-weight:700">課長</td><td>建設業経理事務士2級</td><td>第一種衛生管理者</td></tr>
+                        </tbody>
+                    </table>
+                </details>
+
+                <details>
+                    <summary>支援制度</summary>
+                    <table>
+                        <thead><tr><th>項目</th><th>内容</th></tr></thead>
+                        <tbody>
+                            <tr><td>受験費用</td><td>初回受験は全額会社負担</td></tr>
+                            <tr><td>テキスト・教材</td><td>会社指定テキストを支給</td></tr>
+                            <tr><td>社内勉強会</td><td>月1回（業務時間内）</td></tr>
+                            <tr><td>合格報奨金</td><td>資格ごとに規定の報奨金を支給</td></tr>
+                            <tr><td>学習時間確保</td><td>試験前2週間は残業削減配慮</td></tr>
+                        </tbody>
+                    </table>
+                </details>
+            </div>
+
+            <!-- 8. 育成計画書 -->
+            <div class="section" id="plan">
+                <h2><span class="section-num">8</span>育成計画書</h2>
+
+                <details open>
+                    <summary>フォーマット項目</summary>
+                    <table>
+                        <thead><tr><th>項目</th><th>記入内容</th></tr></thead>
+                        <tbody>
+                            <tr><td>対象者名</td><td></td></tr>
+                            <tr><td>所属・職位</td><td></td></tr>
+                            <tr><td>育成期間</td><td>YYYY/MM 〜 YYYY/MM</td></tr>
+                            <tr><td>育成目標</td><td>この期間で到達すべき姿</td></tr>
+                            <tr><td>実施内容</td><td>OJT / Off-JT / 自己学習の具体的メニュー</td></tr>
+                            <tr><td>現状レベル</td><td>現時点のスキル・行動レベル</td></tr>
+                            <tr><td>課題</td><td>到達目標とのギャップ</td></tr>
+                            <tr><td>具体的アクション</td><td>誰が・何を・いつまでに</td></tr>
+                            <tr><td>記入者</td><td>上長名</td></tr>
+                            <tr><td>振り返り</td><td>半期ごとのコメント欄</td></tr>
+                        </tbody>
+                    </table>
+                </details>
+
+                <details>
+                    <summary>記入例：技術職（1〜5年目）</summary>
+                    <table>
+                        <thead><tr><th>年次</th><th>実施内容</th><th>目標</th><th>現状</th><th>課題</th><th>備考</th></tr></thead>
+                        <tbody>
+                            <tr><td>1年目</td><td>OJT（先輩同行）</td><td>先輩に習いながら基本作業ができる</td><td>自己判断できない業務が多い</td><td>基本工具の操作と安全行動の習慣化</td><td>安全教育・UTP成端実技</td></tr>
+                            <tr><td>2年目</td><td>OJT + Off-JT</td><td>基本的な施工を指導なしで遂行できる</td><td>ケーブル敷設・成端は一人でできる</td><td>図面の読解力、測定作業の精度向上</td><td>電工2種学習開始</td></tr>
+                            <tr><td>3年目</td><td>知識強化</td><td>小規模現場を単独で担当できる</td><td>定型作業は安定しているが応用に課題</td><td>トラブル時の判断力、報告書作成</td><td>電工2種取得、DD3種学習</td></tr>
+                            <tr><td>4年目</td><td>指導法習得</td><td>後輩1名のOJTトレーナーを務められる</td><td>技術は安定、教え方に不安</td><td>教える技術の習得、コーチングスキル</td><td>eラーニング活用</td></tr>
+                            <tr><td>5年目</td><td>主任準備</td><td>主任昇格に向けた準備完了</td><td>後輩指導も板につき、難度の高い仕事もこなせる</td><td>工程管理・原価管理の視点を身につける</td><td>PM研修受講</td></tr>
+                        </tbody>
+                    </table>
+                </details>
+
+                <details>
+                    <summary>記入例：営業職（1〜5年目）</summary>
+                    <table>
+                        <thead><tr><th>年次</th><th>実施内容</th><th>目標</th><th>現状</th><th>課題</th><th>備考</th></tr></thead>
+                        <tbody>
+                            <tr><td>1年目</td><td>現場研修 + OJT</td><td>自社の施工内容を理解し、客先同行ができる</td><td>技術知識がなく説明できない</td><td>現場経験を通じた技術理解</td><td>現場3ヶ月→営業配属</td></tr>
+                            <tr><td>2年目</td><td>営業OJT</td><td>担当企業を単独訪問し基本対応ができる</td><td>先輩同行なら対応できる</td><td>単独訪問時の自信と対応力</td><td>ビジネスマナー研修</td></tr>
+                            <tr><td>3年目</td><td>自立強化</td><td>ルーティン営業を自走し見積対応ができる</td><td>単独訪問・基本対応は安定</td><td>見積精度、提案内容の質向上</td><td>ITパスポート取得</td></tr>
+                            <tr><td>4年目</td><td>提案力強化</td><td>客先ニーズを引き出し提案ができる</td><td>ルーティンは安定、提案型に移行中</td><td>ヒアリング力、プレゼン力</td><td>FP3級・簿記3級学習</td></tr>
+                            <tr><td>5年目</td><td>主任準備</td><td>後輩のOJTができ、主任昇格準備完了</td><td>提案型営業が軌道に乗りつつある</td><td>計数管理の視点、後輩指導</td><td>営業数字の自己管理</td></tr>
+                        </tbody>
+                    </table>
+                </details>
+            </div>
+
+            <!-- 9. ブラザー・シスター制度 -->
+            <div class="section" id="bs">
+                <h2><span class="section-num">9</span>ブラザー・シスター制度</h2>
+
+                <p style="margin-bottom: 16px;">新入社員・中途入社者に対し、年齢の近い先輩社員を「ブラザー/シスター」として配置する。</p>
+
+                <div class="bs-grid">
+                    <div class="bs-card">
+                        <h4>制度概要</h4>
+                        <ul>
+                            <li><strong>対象:</strong> 入社1〜2年目の社員</li>
+                            <li><strong>担当者の条件:</strong> 入社3〜7年目、同部門所属</li>
+                            <li><strong>担当人数:</strong> 1名あたり新人1名</li>
+                            <li><strong>期間:</strong> 入社後1年間</li>
+                        </ul>
+                    </div>
+                    <div class="bs-card">
+                        <h4>役割と運用</h4>
+                        <ul>
+                            <li><strong>役割:</strong> 実務指導 + 精神面のフォロー + 組織への馴染み支援</li>
+                            <li><strong>面談:</strong> 週1回の定期面談（30分）+ 日常的なフォロー</li>
+                            <li><strong>上長の関与:</strong> 月1回、担当者・新人・上長の三者面談</li>
+                            <li><strong>事前研修:</strong> 任命前に「指導者研修」（半日）を受講</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. 体系図 -->
+            <div class="section" id="overview">
+                <h2><span class="section-num">10</span>研修体系図（全体像）</h2>
+
+                <div class="chart-wrapper">
+
+                    <!-- 安全教育: 全体基盤 -->
+                    <div class="chart-foundation safety-bar">
+                        安全教育（全社・全階層 / 継続プログラム）
+                        <small>KY活動 / リスクアセスメント / 法定特別教育 / 事故事例研究 / 季節別安全対策</small>
+                    </div>
+
+                    <!-- 3列×5行のフラットグリッド（行の高さが自動で揃う） -->
+                    <div class="chart-grid">
+                        <!-- Row 1: ヘッダー -->
+                        <div class="chart-col-header">担当〜主任</div>
+                        <div class="chart-col-header">課長代理</div>
+                        <div class="chart-col-header">課長</div>
+
+                        <!-- Row 2: コア技術 -->
+                        <div class="chart-block tech">
+                            <h5>コア技術（基礎）</h5>
+                            <ul>
+                                <li>LAN・光ファイバー基礎</li>
+                                <li>基地局工事・測定器</li>
+                                <li>図面読解・施工報告書</li>
+                            </ul>
+                        </div>
+                        <div class="chart-block tech">
+                            <h5>コア技術（実践）</h5>
+                            <ul>
+                                <li>トラブルシューティング</li>
+                                <li>設計・積算の基礎</li>
+                                <li>施工管理4大管理</li>
+                                <li>新技術動向・OTDR</li>
+                            </ul>
+                        </div>
+                        <div class="chart-block tech">
+                            <h5>コア技術（管理）</h5>
+                            <ul>
+                                <li>複数現場の同時管理</li>
+                                <li>品質マネジメント</li>
+                                <li>協力会社マネジメント</li>
+                            </ul>
+                        </div>
+
+                        <!-- Row 3: ヒューマンスキル -->
+                        <div class="chart-block human">
+                            <h5>ヒューマンスキル</h5>
+                            <ul>
+                                <li>報連相・ビジネスマナー</li>
+                                <li>ロジカルシンキング</li>
+                                <li>時間管理</li>
+                            </ul>
+                        </div>
+                        <div class="chart-block human">
+                            <h5>ヒューマンスキル</h5>
+                            <ul>
+                                <li>プレゼンテーション</li>
+                                <li>コーチング</li>
+                                <li>ネゴシエーション</li>
+                            </ul>
+                        </div>
+                        <div class="chart-block human">
+                            <h5>ヒューマンスキル</h5>
+                            <ul>
+                                <li>ラインケア</li>
+                                <li>評価面談スキル</li>
+                                <li>課題解決・戦略策定</li>
+                            </ul>
+                        </div>
+
+                        <!-- Row 4: マネジメント / 全社共通 -->
+                        <div class="chart-block common">
+                            <h5>全社共通</h5>
+                            <ul>
+                                <li>ハラスメント防止</li>
+                                <li>情報セキュリティ</li>
+                                <li>コンプライアンス</li>
+                                <li>メンタルヘルス</li>
+                            </ul>
+                        </div>
+                        <div class="chart-block mgmt">
+                            <h5>マネジメント</h5>
+                            <ul>
+                                <li>リーダーシップ基礎</li>
+                                <li>プロジェクトマネジメント</li>
+                                <li>原価管理基礎</li>
+                            </ul>
+                        </div>
+                        <div class="chart-block mgmt">
+                            <h5>マネジメント</h5>
+                            <ul>
+                                <li>組織運営・労務管理</li>
+                                <li>経営管理基礎</li>
+                                <li>リスクマネジメント</li>
+                            </ul>
+                        </div>
+
+                        <!-- Row 5: 資格 -->
+                        <div class="chart-block cert">
+                            <h5>資格</h5>
+                            <ul>
+                                <li>職長教育・低圧電気</li>
+                                <li>ITパスポート</li>
+                            </ul>
+                        </div>
+                        <div class="chart-block cert">
+                            <h5>資格</h5>
+                            <ul>
+                                <li>第二種電気工事士</li>
+                                <li>FP3級・簿記3級</li>
+                            </ul>
+                        </div>
+                        <div class="chart-block cert">
+                            <h5>資格</h5>
+                            <ul>
+                                <li>2級施工管理技士</li>
+                                <li>FP3級・簿記3級</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 横断支援制度 -->
+                    <div class="chart-foundation support-bar">
+                        ブラザー・シスター制度（入社1〜2年目 &larr; 3〜7年目が担当）
+                    </div>
+                    <div class="chart-foundation support-bar">
+                        育成計画書（全社員 / 上長が年次で作成 / 半期で振り返り）
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            HSJ 人財育成体系 研修設計書 &mdash; 総務人事部 &mdash; 2026年4月
+        </div>
+    </div>
+</body>
+</html>
